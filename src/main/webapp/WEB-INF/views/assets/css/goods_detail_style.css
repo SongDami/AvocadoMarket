@@ -1,0 +1,614 @@
+@charset "utf-8";
+/* ===============공통 내용=============== */
+
+* {
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+    color: #222;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* 조원 모두 통일하기(줄어드는 최소 사이즈 지정) */
+body {
+    min-width: 1200px;
+}
+
+
+
+.item-img img{
+	width: 210px;
+	height: 210px;
+	border-radius:5px;
+}
+
+.goods_detail_content button{
+	height: 30px;
+	width: auto;
+	margin-right:3px;
+	margin-left:3px;
+	color: white;
+	background-color: #356211;
+	border-radius: 5px;
+	text-align: center;
+	border: 1px solid #356211;
+}
+
+
+
+.goods_detail_content button:hover{
+	background-color: #1c3609;
+}
+/* ===============공통 내용 끝=============== */
+
+/* ===============추가 댓글 =============== */
+
+
+.comment_plus_div{
+	text-align: center;
+}
+
+.comment_plus .comment_12 {
+    padding-top: 15px;
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment_plus .comment_13 {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment_plus .comment_14 {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment_plus .comment_15 {
+    padding-top: 8px;
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+/* ===============추가 댓글 =============== */
+
+/* ===============댓글 =============== */
+
+.comment_input{
+	display: none;
+	width: 1080px;
+	height: 30px;
+	border-color:#c9c9c9;
+	 border-radius: 5px;
+}
+.comment_btn3{
+	display: none;
+}
+.comment_btn4{
+	display: none;
+}
+#comment button#comment_btn3{
+	background-color : #c9c9c9; 
+}
+
+.comment_bottom{
+	height: 30px;
+	display: inline-block;
+}
+
+#comment_origin_submit{
+	color : #c9c9c9;
+}
+/* ===============댓글 끝=============== */
+/*==============팝업========================*/
+.button{
+    width: 100%;
+    height: 40px;
+    background-color : white;
+    border-style: none;
+    text-align: left;
+}
+
+.detail_nick .layer-content button{
+    color: black;
+    width: 440px;
+    height: 40px;
+    background-color : white;
+    text-align : left;
+    margin-top : 0px;
+    border : 0px; 
+}
+.button:hover, .button1:hover{
+    background-color:#f2f2f2;
+}
+
+.pop-conts h3{
+    border-bottom:  1px solid #c9c9c9;
+    padding-bottom: 7px;
+}
+
+.layer-content > button:nth-child(1){
+margin-top: 5px;
+}
+/**
+* ==============================+
+* Style : layer-popup
+* ==============================+
+ */
+.layer-wrap {
+    border-radius: 5px;
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.layer-wrap:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -.25em;
+}
+
+.pop-layer {
+    display: inline-block;
+    vertical-align: middle;
+    width: 500px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 5px solid #356211;
+    z-index: 10;
+    font-family:Tahoma;
+}
+
+.pop-layer .pop-container {
+    padding: 20px 25px;
+}
+.pop-layer .btn-r {
+    width: 100%;
+    margin: 10px 0 20px;
+    padding-top: 10px;
+    border-top: 1px solid #DDD;
+    text-align: right;
+}
+a.btn-layerClose {
+    display: inline-block;
+    height: 25px;
+    padding: 0 14px 0;
+    border: 1px solid red;
+    background-color: red;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 25px;
+    text-decoration: none;
+}
+
+a.btn-layerClose:hover{
+    background-color: #8a1a12;
+    border: 1px solid #8a1a12;
+}
+
+a.btn-layerSbmit:hover{
+    background-color: #1c3609;
+}
+
+a.btn-layerSbmit {
+    display: inline-block;
+    height: 25px;
+    padding: 0 14px 0;
+    border: 1px solid #356211;
+    background-color: #356211;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 25px;
+    text-decoration: none;
+}
+/*==========팝업========================*/
+
+/* ===============내용 시작=============== */
+
+.goods_detail_content{
+	width:1200px;
+	padding-top: 30px;
+	margin:auto;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.detail_price{
+	font-size:35px;
+	padding-bottom : 10px;
+	width:100%;
+	border-bottom: 2px solid black;
+}
+
+
+.detail_tr_last{
+	display: inline-block;
+	width: 80px;
+	padding-top: 10px;
+	padding-bottom: 21px;
+	font-size: 15px;
+	font-weight : bold;
+}
+
+.detail_area{
+	display: inline-block;
+	color : blue;
+	width: 500px;
+	font-weight : bold;
+	font-size: 15px;
+}
+
+
+.befote .btn-img1{
+	width: 100px;
+	margin: auto;
+}
+.product_view {
+    position: relative;
+    padding: 0 0 0 600px;
+    width: 1200px;
+    box-sizing: border-box;
+}
+
+.product_view .detail_main_img {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.product_view .detail_main_img .item{
+    width: 570px;
+    height: 450px;
+    border: 1px solid #e8e8e8;
+    border-radius:5px;
+    
+}
+
+.carousel-control{
+	border-radius:5px;
+}
+
+.product_view .detail_main_img :after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.product_view .detail_tr_first {
+    padding: 14px 0;
+    font-size: 30px;
+    color: #444;
+    text-align: left;
+}
+
+.product_view h2 {
+    margin: 0px 0 15px;
+    padding: 3px 0 10px;
+    font-size: 30px;
+    color: #232323;
+    line-height: 26px;
+}
+
+
+.detail_nick .btn-img1 img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 35px;
+    height: 40px;
+}
+
+.detail_nick{
+	padding-top:15px;
+}
+
+.detail_nick button,.detail_send button{
+	color: white;
+}
+
+.detail_nick .btn-img2{
+    width: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+}
+
+.detail_nick{
+	 display: inline-block;
+}
+.detail_nick .btn-black .fas .fa-exclamation-circle{
+	padding-top: 10px;
+    display: inline-block;
+    padding-right: 40px;
+    width: 30px;
+    font-size: 19px;
+}
+.fa-exclamation-circle:before{
+	font-size :20px;
+	padding-right: 5px;
+	vertical-align: middle;
+}
+
+.detail_send {
+	margin:0 auto;
+	text-align:center;
+}
+.detail_send .btn-img1 {
+	background-color:#C90000;
+	border-color : #C90000;
+    margin-top: 22px;
+    margin-right:10px;
+    width: 280px;
+    height: 50px;
+}
+
+
+.detail_send .btn-img1:hover {
+	background-color: #a30505;
+}
+
+
+.detail_send .btn-img2 {
+    width: 280px;
+    background-color:#FFA425;
+    border-color : #FFA425;
+    height: 50px;
+}
+.detail_send .btn-img2:hover {
+	background-color: #e0901f;
+}
+
+.detail_counter .detail_counter_p1 {
+	display: inline-block;
+    padding-top: 40px;
+    font-size: 15px;
+    color : gray;
+}
+
+.detail_counter .detail_counter_p2 {
+	display: inline-block;
+	padding-top: 10px;
+    font-size: 15px;
+    color : gray;
+}
+
+.detail_counter .detail_counter_p3 {
+	display: inline-block;
+    padding-top: 10px;
+    font-size: 15px;
+    color : gray;
+}
+
+.detail_content p {
+    overflow-y: scroll;
+    width: 100%;
+    min-height: 600px;  
+	border-radius:5px;
+	border: 1px solid #c9c9c9;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-top: 30px;
+    padding-bottom: 40px;
+}
+
+.before {
+    margin-top: 10px;
+    width: 1200px;
+    text-align: center;
+}
+
+.before .before_btn{
+	    color: white;
+        background-color: #356211;
+        border-radius: 5px;
+        text-align: center;
+        width: 100px;
+        height: 35px;
+        line-height: 20px;
+        border: 1px solid #356211;
+        margin-top: 5px;
+        display: inline-block;
+}
+.before .before_btn:hover{ 
+    	background-color: #1c3609;
+        
+}
+.textarea button:hover{ 
+    	background-color: #1c3609;
+        
+}
+textarea {resize: none;}
+.comment{
+	border-bottom: 1px solid #c9c9c9;
+}
+.comment .comment_1 {
+    padding-top: 50px;
+    font-size: 20px;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.comment .comment_2 {
+    padding-top: 15px;
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment .comment_3 {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment .comment_4 {
+    font-size: 15px;
+    display: inline-block;
+}
+
+.comment .comment_5 {
+    font-size: 15px;
+}
+
+.textarea{
+	padding-bottom : 40px;
+}
+
+.textarea .textarea_input {
+    margin-top: 20px;
+    width: 1070px;
+    border-color:#c9c9c9;
+}
+
+
+.textarea .textarea_button{
+	padding:0px;
+	height: 46px;
+	vertical-align: top;
+	margin-top: 20px;
+	color: white;
+	background-color: #356211;
+	border-radius: 5px;
+	text-align: center;
+	border: 1px solid #356211;
+}
+
+.textarea .textarea_button {
+    width: 116px; 
+}
+/* ==============내용 끝=============== */
+
+/* ===============인기 상품=============== */
+ .item-list .popular-item {
+	text-align: left;
+/* 	background-color: pink; */
+}
+
+.item-list .popular-item-list{
+	display: inline-block;
+	position: relative;
+	min-height: 1px;
+}
+
+.item-list .popular-item-list:first-child {
+	padding: 0px 86px 40px 0px;
+}
+
+.popular-item-list:nth-child(2) {
+	padding: 0px 58px 40px 30px;
+}
+
+.popular-item-list:nth-child(3) {
+	padding: 0px 30px 40px 58px;
+}
+
+.item-list .popular-item-list:last-child {
+	padding: 0px 0px 40px 86px;
+}
+
+.item-list .popular-item-title {
+	padding-top: 30px;
+}
+
+.item-list .list-title {
+	font-size: 20px;
+	vertical-align:middle;
+}
+
+.item-list .text {
+	position: relative;
+	text-align: center;
+	top: 10px;
+}
+
+.item-name {
+	margin-bottom: 0px;
+	font-size: 16px;
+}
+
+.item-list .price, .item-list .town {
+	position: relative;
+	text-align: center;
+	font-size: 15px;
+	margin-bottom: 0px;
+}
+
+.item-list p.price {
+	font-weight: bold;
+}
+
+.item-list p.town {
+	font-weight: 0;
+}
+
+.item-list .item-img {
+	width: 210px;
+	height: 210px;
+	border-radius:5px;
+}
+
+textarea{
+	border-radius:5px;
+
+}
+
+img{
+	border-radius:5px;
+}
+.btn-more {
+	float: right;
+	font-size: 12px;
+	padding-top: 14px;
+}
+
+/* float clear */
+.btn-more div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+
+a.btn-more:hover {
+	text-decoration: underline;
+}
+
+/* 좋아요를 위한 엄마박스 -relative */
+.product-div6 {
+    height: 0px;
+    position: relative;
+}
+
+/* <div>좋아요 자식박스 -absolute */
+.product-div7 {
+    width: 36px;
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* <div>좋아요 - <div> */
+.product-div8 {
+    width: 32px;
+    height: 30px;
+    margin: 0px auto;
+    background: url(../img/like.svg) center center / cover;
+}
+
+
+/* ===============인기 상품 끝=============== */
+

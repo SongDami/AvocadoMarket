@@ -1,0 +1,218 @@
+@charset "utf-8";
+
+* {
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+    color: #222;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* 조원 모두 통일하기(줄어드는 최소 사이즈 지정) */
+body {
+    min-width: 1200px;
+}
+
+hr {
+    display: none;
+}
+
+
+.container {
+    width: 1100px;
+    margin: auto;
+    height: 1200px;
+}
+
+
+.title_name {
+    display: inline-block;
+    font-size: 28px;
+    color: #222;
+    font-weight: bold;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+}
+
+/* 필수 입력 항목(*) */
+.title_ect {
+    font-size: 12px;
+    color: #b0b0b0
+}
+
+/* 본문 왼쪽 타이틀 */
+.storeup>div>p {
+    display: block;
+    font-size: 16px;
+    width: 130px;
+    float: left;
+
+}
+
+/* 썸네일 사이즈 지정*/
+
+.store_img img {
+    width: 200px;
+    height: 200px;
+    float: left;
+    border-radius: 5px;
+}
+
+
+
+/* float clear */
+.storeup_body div:after {
+    clear: both;
+    float: none;
+    display: block;
+    content: '';
+}
+
+/* 업체 등록 body 크기, 위치 */
+.storeup_body {
+    width: 800px;
+    margin: auto;
+
+}
+
+/* 전체 버튼 색, 둥글게 */
+.container button {
+    background-color: #356211;
+    color: white;
+    border: 1px solid #356211;
+    border-radius: 5px;
+}
+
+/* 버튼 설정 */
+.store_loc button {
+    height: 32px;
+    line-height: 28px;
+    float: right;
+    margin-right: 20px;
+}
+
+/* input box 크기, 위치 설정 */
+form input,
+textarea {
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+    resize: none;
+}
+
+/* 파일선택 버튼 사이즈 조정 */
+.imgup {
+    width: 180px;
+}
+
+/* ----- input 사이즈 설정 ----- */
+
+.store_name input {
+    width: 73%;
+    height: 32px;
+}
+
+.store_price input {
+    width: 20%;
+    height: 32px;
+}
+
+.store_category select {
+    height: 36px;
+    width: 20%;
+}
+
+.store_number input {
+    height: 32px;
+    width: 30%;
+}
+
+.store_email input,
+.store_phone input {
+    height: 32px;
+    width: 30%;
+}
+
+.store_loc input {
+    height: 32px;
+    width: 280px;
+    margin-right: 3px;
+
+}
+
+/* ----- input 사이즈 설정 끝 ----- */
+
+
+
+/* 각 div 사이 여백 */
+.storeup_body>form>div {
+    padding-bottom: 25px;
+}
+
+/* 지역선택 select 크기 */
+select {
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+    color: #828282
+}
+
+/* 본문 크기 */
+.store_content textarea {
+    width: 80%;
+    height: 300px;
+
+}
+
+
+.desc {
+    float:left;
+    width: 500px;
+}
+
+.desc p {
+    display: inline-block;
+}
+
+.desc_top {
+    padding: 16px 0 2px 0;
+    color: #d60000;
+    font-weight: bold;
+    float : left;
+}
+
+.desc_bottom {
+    color: #737373;
+    font-size: 15px;
+    padding-bottom: 20px;
+    float : left;
+}
+
+.imgup {
+    width: 646px;
+    padding: 5px 0 5px 0 ;
+}
+
+/* 회원가입 버튼 */
+.upload_button {
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+    margin: auto;
+}
+
+/* 등록버튼 */
+.upload_button button {
+    font-size: 17px;
+    width: 180px;
+    height: 35px;
+}
+
+.desc_result{
+    text-align:center;
+    margin:auto;
+    color:#9c9c9c;
+    font-size:15px;
+    }

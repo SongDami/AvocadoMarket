@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BlackMapper">
+
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="blackMapper"
+        type="study.spring.springhelper.model.Black">
+        <result property="black_id"   column="black_id" />
+        <result property="black_type"     column="black_type" />
+        <result property="member_id_to"   column="member_id_to" />
+        <result property="member_id_from" column="member_id_from" />
+        <result property="black_state"      column="black_state" />
+        <result property="created_at" column="created_at" />
+        <result property="updated_at"     column="updated_at" />
+        <result property="deleted_at"   column="deleted_at" />
+        <result property="nick"    column="nick" />
+        <result property="thumbnailPath"    column="thumbnailPath" />
+        <result property="report_count"    column="report_count" />
+    </resultMap>
+    
+    <!-- ================= 신고하기 =================== -->
+    <!-- 신고 다중행 조회를 위한 기능 정의 -->
+    <select id="reportselectList"
+        parameterType="study.spring.springhelper.model.Black"
+        resultMap="blackMapper">
+        SELECT  a.black_id,
+	            a.black_type,
+	            a.member_id_to,
+	            a.member_id_from,
+	            a.black_state,
+	            a.created_at,
+	            a.updated_at,
+	            a.deleted_at,
+	            c.nick,
+                b.thumbnailPath
+          FROM  black a
+                join member c on c.member_id = a.member_id_to
+                left outer join file b on b.upload_type = 'member' and b.upload_id = a.member_id_to and b.file_seq = 1
+         WHERE  a.goods_id = #{goods_id}
+           AND  black_type = '신고'
+           AND  #{member_id} = 1
+         ORDER  BY a.updated_at DESC
+         LIMIT  #{startRow}, #{perPgLine}
+    </select>
+    
+    <!-- 신고  데이터 수 조회를 위한 기능 정의 -->
+    <select id="reportselectCount"
+        parameterType="study.spring.springhelper.model.Black" resultType="int">
+        SELECT  COUNT(*)
+          FROM  black 
+         WHERE  member_id_to=#{member_id_to}
+		   AND  black_type = '신고'
+    </select>
+    
+    <!-- 신고하기 갯수 10개 이상인 상품 삭제 -->
+    <delete id="reportdelete"
+        parameterType="study.spring.springhelper.model.Black">
+        DELETE  FROM goods
+		 WHERE  goods_id in (
+				SELECT  goods_id
+				  FROM  black
+				 WHERE  black_type = '신고'
+				 GROUP  BY goods_id
+				HAVING  COUNT(black_id) > 10
+				)
+    </delete>
+
+    <!-- 이미 신고 했는지 확인 -->
+    <select id="chkReportCnt"
+        parameterType="study.spring.springhelper.model.Black" resultType="int">
+        SELECT  count(black_id)
+          FROM  black
+         WHERE  member_id_to = #{member_id_to}
+           AND  member_id_from = #{member_id_from}
+           AND  black_type = '신고'
+    </select>
+
+    <!-- 신고  데이터 저장을 위한 기능 정의 -->
+    <insert id="reportinsert"
+        parameterType="study.spring.springhelper.model.Black"
+        useGeneratedKeys="true" keyProperty="black_id">
+        INSERT INTO black (
+			black_type,
+			member_id_to,
+			member_id_from,
+			black_state,
+			created_at,
+			updated_at,
+			deleted_at
+        ) VALUES (
+            '신고',
+            #{member_id_to},
+            #{member_id_from},
+            #{black_state},
+            now(), 
+            now(), 
+            "99991231" 
+        )
+    </insert>
+    
+    <!-- ================= 차단하기 =================== -->    
+    <!-- 쪽지보내기 차단여부 확인 -->
+    <select id="selectItem"
+        parameterType="study.spring.springhelper.model.Black"
+        resultMap="blackMapper">
+        SELECT  black_id,
+				black_type,
+				member_id_to,
+				member_id_from,
+				black_state,
+				created_at,
+				updated_at,
+				deleted_at
+          FROM  black
+         WHERE  member_id_from=#{member_id_from}
+           AND  member_id_to = #{member_id_to}
+           AND  black_type = "차단"
+         ORDER  BY updated_at DESC
+    </select>
+
+    <!-- 차단 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList"
+        parameterType="study.spring.springhelper.model.Black"
+        resultMap="blackMapper">
+        SELECT  a.black_id,
+				a.black_type,
+				a.member_id_to,
+				a.member_id_from,
+				a.black_state,
+				a.created_at,
+				a.updated_at,
+				a.deleted_at,
+				c.nick,
+        		b.thumbnailPath
+          FROM  black a
+          		join member c on c.member_id = a.member_id_to
+        		left outer join file b on b.upload_type = 'member' and b.upload_id = a.member_id_to and b.file_seq = 1
+         WHERE  a.member_id_from = #{member_id_from}
+         AND	black_type = "차단"
+         ORDER  BY a.updated_at DESC
+		 LIMIT #{startRow}, #{perPgLine}
+    </select>
+    
+    <!-- 차단 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll"
+        parameterType="study.spring.springhelper.model.Black" resultType="int">
+        SELECT  COUNT(*)
+          FROM  black 
+         WHERE  member_id_from = #{member_id_from}
+           AND  black_type = '차단'
+    </select>
+
+    <!-- 이미 차단 했는지 확인 -->
+    <select id="chkListCnt"
+        parameterType="study.spring.springhelper.model.Black" resultType="int">
+        SELECT  count(black_id)
+          FROM  black
+         WHERE  member_id_to = #{member_id_to}
+           AND  member_id_from = #{member_id_from}
+           AND  black_type = '차단'
+    </select>
+
+    <!-- 차단 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem"
+        parameterType="study.spring.springhelper.model.Black"
+        useGeneratedKeys="true" keyProperty="black_id">
+        INSERT INTO black (
+			black_type,
+			member_id_to,
+			member_id_from,
+			black_state,
+			created_at,
+			updated_at,
+			deleted_at
+        ) VALUES (
+            '차단',
+            #{member_id_to},
+            #{member_id_from},
+            'Y',
+            now(), 
+            now(), 
+            "99991231" 
+        )
+    </insert>
+
+    <!-- 차단 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem"
+        parameterType="study.spring.springhelper.model.Black">
+        DELETE  FROM black 
+         WHERE  black_id = #{black_id} 
+           AND  member_id_from = #{member_id_from}
+           AND  black_type = '차단'
+    </delete>
+
+</mapper>

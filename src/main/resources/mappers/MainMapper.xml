@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainMapper">
+
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="mainMapper"
+        type="study.spring.springhelper.model.Main">
+        <result property="goods_id"   column="goods_id" />
+        <result property="goods_name"     column="goods_name" />
+        <result property="priceNum"   column="priceNum" />
+        <result property="dong_dong_id" column="dong_dong_id" />
+        <result property="dong_name" column="dong_name" />
+        <result property="hit"      column="hit" />
+        <result property="created_at" column="created_at" />
+        <result property="member_id"    column="member_id" />
+        <result property="thumbnailPath"    column="thumbnailPath" />
+        <result property="category_category_id"    column="category_category_id" />
+		<result property="like_yn" column="like_yn" />
+    </resultMap>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <!--인기 상품  hit(조회수)로 검색-->
+<!--     <select id="selectItem"
+        parameterType="study.spring.springhelper.model.Main"
+        resultMap="mainMap">
+        SELECT 
+        goods_id,
+        goods_name,
+        price,
+        dong_dong_id,
+        hit,
+        created_at,
+        keyword_keyword_id,
+        keyword_name,
+        member_id
+        FROM goods
+        ORDER BY hit DESC
+    </select> -->
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <!--인기 상품  hit(조회수)로 검색 , 최근 일주일 중에 -->
+    <select id="getmainTopList"
+        parameterType="study.spring.springhelper.model.Main"
+        resultMap="mainMapper">
+        SELECT  b.goods_id,
+		        IFNULL(b.goods_name, '상품없음') as goods_name,
+		        b.category_category_id,
+		        IFNULL(FORMAT(b.price,0), ' ') as priceNum,
+		        IFNULL((select dong_name from dong where dong_id = b.dong_dong_id), ' ') as dong_name,
+		        b.hit,
+		        b.created_at,
+		        b.member_id,
+		        b.filePath,
+		        IFNULL(b.thumbnailPath, '/favicon.ico') as thumbnailPath,
+        	    IFNULL((select  case when count(1) > 0 then 'Y' else 'N' end 
+        				  from  `like`
+        				 where  goods_id = b.goods_id
+        				   and  member_id = #{member_id}), 'N') as like_yn
+		  FROM (select 1 as file_seq from dual union all
+		        select 2 as file_seq from dual union all
+		        select 3 as file_seq from dual union all
+		        select 4 as file_seq from dual) t
+		        left outer join
+		       (SELECT  c.goods_id,
+						c.goods_name,
+						c.category_category_id,
+						c.price,
+						c.dong_dong_id,
+						c.hit,
+						c.created_at,
+						c.member_id,
+						c.file_id,
+						c.filePath,
+						c.thumbnailPath,
+						c.seq
+				  FROM (SELECT  a.goods_id,
+								a.goods_name,
+								a.price,
+								a.dong_dong_id,
+								a.category_category_id,
+								a.hit,
+								a.created_at,
+								a.member_id,
+								b.file_id,
+								b.filePath,
+								b.thumbnailPath,
+								row_number() over(order by a.hit desc) as seq
+						  FROM  goods a
+						  		LEFT OUTER JOIN file b on b.upload_type = 'goods' and b.upload_id = a.goods_id and b.file_seq = 1
+						 WHERE  DATE_FORMAT(created_at, '%Y%m%d') > (DATE_FORMAT(now(), '%Y%m%d') - 7)
+						   AND  a.state != '판매완료'
+						) c
+				 ORDER  BY seq
+				 LIMIT  4
+				) b on b.seq = t.file_seq
+		 ORDER  BY t.file_seq
+    </select>
+    	
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <!-- 신규 상품 로 create_at검색 일주일 -->
+    <select id="getmainNewList"
+        parameterType="study.spring.springhelper.model.Main"
+        resultMap="mainMapper">
+        SELECT  b.goods_id,
+        		b.category_category_id,
+		        IFNULL(b.goods_name, '상품없음') as goods_name,
+		        IFNULL(FORMAT(b.price,0), ' ') as priceNum,
+		        IFNULL((select dong_name from dong where dong_id = b.dong_dong_id), ' ') as dong_name,
+		        b.hit,
+		        b.created_at,
+		        b.member_id,
+		        b.filePath,
+		        IFNULL(b.thumbnailPath, '/favicon.ico') as thumbnailPath,
+        	    IFNULL((select  case when count(1) > 0 then 'Y' else 'N' end 
+        				  from  `like`
+        				 where  goods_id = b.goods_id
+        				   and  member_id = #{member_id}), 'N') as like_yn
+		  FROM (select 1 as file_seq from dual union all
+		        select 2 as file_seq from dual union all
+		        select 3 as file_seq from dual union all
+		        select 4 as file_seq from dual) t
+		        left outer join
+		       (SELECT  c.goods_id,
+		       			c.category_category_id,
+						c.goods_name,
+						c.price,
+						c.dong_dong_id,
+						c.hit,
+						c.created_at,
+						c.member_id,
+						c.file_id,
+						c.filePath,
+						c.thumbnailPath,
+						c.seq
+				  FROM (SELECT  a.goods_id,
+				  				a.category_category_id,
+								a.goods_name,
+								a.price,
+								a.dong_dong_id,
+								a.hit,
+								a.created_at,
+								a.member_id,
+								b.file_id,
+								b.filePath,
+								b.thumbnailPath,
+								row_number() over(order by a.created_at desc) as seq
+						  FROM  goods a
+						  		LEFT OUTER JOIN file b on b.upload_type = 'goods' and b.upload_id = a.goods_id and b.file_seq = 1
+						 WHERE  DATE_FORMAT(created_at, '%Y%m%d') > (DATE_FORMAT(now(), '%Y%m%d') - 7)
+						   AND  a.state != '판매완료'
+						) c
+				 ORDER  BY seq
+				 LIMIT  4
+				) b on b.seq = t.file_seq
+		 ORDER  BY t.file_seq
+    </select>
+     
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <!-- 추천 상품  keyword로 검색 및 랜덤-->
+    <select id="getkeywordList"
+        parameterType="study.spring.springhelper.model.Main"
+        resultMap="mainMapper">
+		select  b.goods_id,
+		        IFNULL(b.goods_name, '상품없음') as goods_name,
+		        b.category_category_id,
+		        IFNULL(FORMAT(b.price,0), ' ') as priceNum,
+		        IFNULL((select dong_name from dong where dong_id = b.dong_dong_id), ' ') as dong_name,
+		        b.hit,
+		        b.created_at,
+		        b.member_id,
+		        b.filePath,
+		        IFNULL(b.thumbnailPath, '/favicon.ico') as thumbnailPath,
+        	    IFNULL((select  case when count(1) > 0 then 'Y' else 'N' end 
+        				  from  `like`
+        				 where  goods_id = b.goods_id
+        				   and  member_id = #{member_id}), 'N') as like_yn
+		  from (select 1 as file_seq from dual union all
+				select 2 as file_seq from dual union all
+				select 3 as file_seq from dual union all
+				select 4 as file_seq from dual) t
+				left outer join
+			   (SELECT  goods_id,
+						goods_name,
+						category_category_id,
+						price,
+						dong_dong_id,
+						hit,
+						created_at,
+						member_id,
+						filePath,
+						thumbnailPath,
+						row_number() over(order by created_at desc) as seq
+				  from (SELECT  a.goods_id,
+								a.goods_name,
+								a.category_category_id,
+								a.price,
+								a.dong_dong_id,
+								a.hit,
+								a.created_at,
+								a.member_id,
+								b.file_id,
+								b.filePath,
+								b.thumbnailPath
+						  FROM  goods a
+						  		left outer join file b on b.upload_type = 'goods' and b.upload_id = a.goods_id and b.file_seq = 1
+						 where  DATE_FORMAT(created_at, '%Y%m%d') > (DATE_FORMAT(now(), '%Y%m%d') - 7)
+						   AND  a.state != '판매완료'
+						 ORDER  BY RAND()
+						 Limit  4
+						) a
+				) b on b.seq = t.file_seq
+		 order  by t.file_seq
+    </select>
+
+</mapper>

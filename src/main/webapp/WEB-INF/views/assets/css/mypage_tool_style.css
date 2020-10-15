@@ -1,0 +1,119 @@
+@charset "utf-8";
+
+
+* {
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+body {
+    min-width: 1200px;
+}
+
+.mytool {
+    width: 1200px;
+    margin: auto;
+
+}
+
+.user {
+    width: 140px;
+    height: 140px;
+}
+
+.title,
+.user_img,
+.usernick,
+.bt {
+    margin: auto;
+    text-align: center;
+}
+
+.title {
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    padding-top: 80px;
+    padding-bottom: 30px;
+}
+
+.usernick {
+    padding-top: 12px;
+    height: 30px;
+}
+
+.usernick img {
+    margin-top: 5px;
+}
+
+.usernick span {
+    font-size: 20px;
+    line-height: 30px;
+    vertical-align: top;
+}
+
+/* 여기 다시하기 */
+.grade {
+    padding-right: 5px;
+    display: inline-block;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.bt {
+    padding: 15px 15px 25px 15px;
+}
+
+.img-rounded {
+    border-radius: 50%;
+}
+
+.bt>button,
+.tab_list>div {
+    color: white;
+    background-color: #356211;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.bt>button {
+    width: 100px;
+    height: 30px;
+    line-height: 20px;
+    border: 1px solid white;
+}
+
+.tab_list>div {
+    display: inline-block;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    float: left;
+}
+
+.tab_list>div>a {
+    color: white;
+    display: block;
+}
+
+/* float clear */
+.tab_list:after {
+    clear: both;
+    float: none;
+    display: block;
+    content: '';
+}
+
+.tab_list>div:hover,
+.bt>button:hover {
+    background-color: #1c3609;
+}
+
+

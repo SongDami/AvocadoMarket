@@ -1,0 +1,272 @@
+@charset "utf-8";
+
+* {
+	font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+	color: #222;
+}
+
+a {
+	color: #222;
+	text-decoration: none;
+}
+
+
+
+/* 좋아요를 위한 엄마박스 -relative */
+.product-div6 {
+    height: 0px;
+    position: relative;
+}
+
+/* <div>좋아요 자식박스 -absolute */
+.product-div7 {
+    width: 36px;
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* <div>좋아요 - <div> */
+.product-div8 {
+    width: 32px;
+    height: 30px;
+    margin: 0px auto;
+    background: url(../img/like.svg) center center / cover;
+}
+
+
+/* 조원 모두 통일하기(줄어드는 최소 사이즈 지정) */
+body {
+	min-width: 1200px;
+}
+
+hr {
+	display: none;
+}
+
+img {
+    border-radius: 5px;
+}
+
+
+
+/* 카테고리 */
+#slide_toggle i {
+	padding-top:20px;
+	padding-bottom:10px;
+	
+}
+#slide_toggle{
+	margin-right:1160px;
+	
+}
+
+#category{
+    display:none; 
+    position:absolute; 
+    width:200px; 
+    height:360px; 
+    background:#fff;
+    z-index: 100000;
+    border: 1px solid #f3f3f3;
+    
+}
+
+#category a{
+    display:block;
+    width:200px;
+    height: 30px;
+    line-height:30px;
+    text-align:center;
+}
+
+#category a:hover{
+    color:#eb4034;
+    font-weight:bold;
+}
+
+
+/**본문 CSS*/
+.main-tbody {
+	width: 1200px;
+	margin: auto;
+	padding-bottom: 100px;
+}
+
+/*카테고리바*/
+.fa-bars {
+
+	padding-top: 7px;
+	color:#222;
+	cursor:pointer;
+	
+}
+
+.fa-bars:hover {
+
+    padding-top: 7px;
+    color:#356211;
+    cursor:pointer;
+    
+}
+
+
+#map{
+	position: inline-block;
+	width: 1050px;
+	height: 300px;
+	border-radius:5px;
+	margin:auto;
+	
+}
+
+/* 배너 영역*/
+#carousel-example-generic{
+	text-align:center;
+	margin:auto;
+	
+}
+.carousel-inner {
+	position: inline-block;
+	width: 1080px;
+	height: 300px;
+	border-radius:5px;
+	margin-left: 20px;
+	padding-bottom:50px;
+	
+}
+
+.carousel{
+	margin-top: 40px;
+	padding-bottom:50px;
+	width: 1115px;
+	height: 300px;
+	margin-left: 20px;
+	
+}
+.carousel-inner>.item>img {
+    line-height: 1;
+    width: 1100px;
+	height: 300px;
+	margin-left: 20px;
+    
+}
+#left-control {
+	width:150px;
+	height:300px;
+	margin-left:19px;
+	border-radius:5px;
+}
+
+#right-control {
+	width:150px;
+	height:300px;
+	margin-right:16px;
+	border-radius:5px;
+}
+
+
+
+/* 지도는 여기에 */
+.main-map {
+	float: right;
+	margin-right:65px;
+	font-weight:bold;
+	padding-top:5px;
+	
+	
+	
+	
+}
+/* float clear */
+.main-map div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+	
+}
+.main-map:hover {
+	cursor:pointer;
+	
+}
+.main-tbody {
+	width: 1200px;
+	margin: auto;
+	background: #fff;
+}
+
+.main {
+	padding: 3px 0px 60px 0px;
+	text-align: center;
+}
+
+.popular-item, .new-item, .recommend-item {
+	text-align: center;
+}
+
+.popular-item-list, .new-item-list, .recommend-item-list {
+	display: inline-block;
+	position: relative;
+	min-height: 1px;
+	padding: 10px 40px 40px 40px;
+}
+
+.popular-item-title {
+	
+	padding-top: 70px;
+	padding-bottom:10px;
+	margin-left: 50px;
+	margin-right: 50p
+}
+
+.new-item-title, .recommend-item-title {
+	padding-top: 30px;
+	padding-bottom:10px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.list-title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.text {
+	position: relative;
+	text-align: center;
+	top: 10px;
+}
+
+.price, .town {
+	position: relative;
+	text-align: center;
+	font-size: 15px;
+	top: 5px;
+}
+
+p.town {
+	/*  position: relative; */
+	font-size: 12px;
+	text-align: center;
+	padding-top: 5px;
+}
+
+p.price {
+	font-weight: bold;
+}
+
+
+.item-img{
+	width: 210px;
+	height: 210px;
+	border-radius:5px;
+}
+
+.item-img img{
+	width: 210px;
+	height: 210px;
+	border-radius:5px;
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsMapper">
+
+	<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="goodsMap" type="study.spring.springhelper.model.Goods">
+        <result property="goods_id" column="goods_id" />
+		<result property="goods_name" column="goods_name" />
+		<result property="goods_content" column="goods_content" />
+		<result property="price" column="price" />
+		<result property="state" column="state" />
+		<result property="hit" column="hit" />
+		<result property="created_at" column="created_at" />
+		<result property="updated_at" column="updated_at" />
+		<result property="deleted_at" column="deleted_at" />
+		<result property="member_id" column="member_id" />
+		<result property="dong_dong_id" column="dong_dong_id" />
+		<result property="buyer_member_id" column="buyer_member_id" />
+		<result property="category_category_id" column="category_category_id" />
+        <result property="dong_name" column="dong_name" />
+        <result property="category_type" column="category_type" />
+        <result property="thumbnailPath"    column="thumbnailPath" />
+        <result property="upload_type"    column="upload_type" />
+        <result property="like_id"    column="like_id" />
+	</resultMap>
+
+
+
+  <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList"
+        parameterType="study.spring.springhelper.model.Goods"
+        resultMap="goodsMap">
+        SELECT
+             g.goods_id
+            ,goods_name
+            ,goods_content
+            ,price
+            ,state
+            ,hit
+            ,g.created_at
+            ,g.updated_at
+            ,g.deleted_at
+            ,g.member_id
+            ,dong_dong_id
+         ,buyer_member_id
+         ,category_category_id
+            ,dong_name
+            ,category_type
+            ,IFNULL(thumbnailPath, '/favicon.ico') as thumbnailPath
+            ,l.like_id
+        FROM goods g
+        INNER JOIN dong d ON g.dong_dong_id=d.dong_id
+        INNER JOIN category c ON g.category_category_id=c.category_id
+        LEFT OUTER JOIN (SELECT * FROM file WHERE file_id IN(SELECT MIN(file_id) FROM file GROUP BY upload_id)) AS i ON g.goods_id = i.upload_id AND upload_type != 'member'
+        LEFT OUTER JOIN (SELECT goods_id, like_id FROM `like` WHERE member_id = #{member_id}) AS l ON l.goods_id = g.goods_id
+
+         <where>
+                state="판매중"
+                <!-- 로그인시 받아온 동 이름으로 수정 예정 -->
+            <if test="dong_name != null and dong_name != ''">
+                AND dong_name = #{dong_name}
+            </if>
+            <if test="goods_name != null and goods_name != ''">
+                AND goods_name LIKE concat('%', #{goods_name}, '%')
+            </if>
+            <if test="category_type != null and category_type != '' and category_type != '전체상품'">
+                AND category_type = #{category_type}
+            </if>
+        </where>
+        
+        ORDER BY g.updated_at DESC
+        
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    
+
+    </select>
+    
+    <!-- 데이터 수 조회를 위한 기능 정의 (리스트)-->
+    <select id="selectCountDongList"
+        parameterType="study.spring.springhelper.model.Goods" resultType="int">
+        SELECT COUNT(*)
+        FROM goods g
+        INNER JOIN dong d ON g.dong_dong_id=d.dong_id
+        GROUP BY dong_name 
+    </select>
+    
+    
+    
+        <!-- 데이터 수 조회를 위한 기능 정의 -->
+        <!-- 로그인시 받아온 동 이름으로 수정 예정 -->
+    <select id="selectCountDong"
+        parameterType="study.spring.springhelper.model.Goods" resultType="int">
+        SELECT COUNT(*)
+        FROM goods g
+        INNER JOIN dong d ON g.dong_dong_id=d.dong_id
+        INNER JOIN category c ON g.category_category_id = c.category_id
+        <where>
+            state="판매중"
+            <if test="dong_name != null and dong_name != ''">
+               AND dong_name = #{dong_name}
+            </if>
+            <if test="goods_name != null and goods_name != ''">
+                AND goods_name LIKE concat('%', #{goods_name}, '%')
+            </if>
+            <if test="category_type != null and category_type != '' and category_type != '전체상품'">
+                AND category_type = #{category_type}
+            </if>
+        </where>
+    </select>
+    
+
+</mapper>

@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+    .mytool {
+        width: 1200px;
+        margin: auto;
+
+    }
+
+ 
+.img-rounded {
+	border:1px solid #c9c9c9;
+    border-radius: 50%;
+   
+}
+ 
+.edit-profile {
+	margin-top:10px;
+}
+
+    .title,
+    .user_img,
+    .usernick,
+    .bt {
+        margin: auto;
+        text-align: center;
+    }
+
+    .title {
+        width: 300px;
+        height: 50px;
+        font-size: 30px;
+        padding-top: 80px;
+        padding-bottom: 30px;
+    }
+
+    .usernick {
+        padding-top: 12px;
+        height: 30px;
+    }
+
+    .usernick img {
+        margin-top: 5px;
+    }
+
+    .usernick span {
+        font-size: 20px;
+        line-height: 30px;
+        vertical-align: top;
+    }
+
+        .grade {
+        padding-right: 5px;
+        display: inline-block;
+        line-height: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .img-rounded {
+        border-radius: 50%;
+    }
+
+
+    .tab_list {
+        width: 1200px;
+        float: left;
+            }
+
+
+    .tab_list>div {
+        color: white;
+        background-color: #356211;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 50px;
+        display: inline-block;
+        width: 600px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 20px;
+        float: left;
+    }
+
+
+
+    .follow-button-group button {
+        color: white;
+        background-color: #356211;
+        border-radius: 5px;
+        text-align: center;
+        width: 100px;
+        height: 35px;
+        line-height: 20px;
+        border: 1px solid #356211;
+        margin-top: 5px;
+        display: inline-block;
+            }
+
+.grade {
+    padding-right: 5px;
+    display: inline-block;
+    line-height: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.bt {
+    padding: 15px 15px 25px 15px;
+}
+
+.img-rounded {
+    border-radius: 50%;
+}
+
+
+.bt>button{
+    color: white;
+    background-color: #356211;
+    border-radius: 5px;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    line-height: 20px;
+    border: 1px solid white;
+}
+
+.bt>button:hover {
+    background-color: #1c3609;
+    }
+
+
+
+
+.hide {
+    display: none;
+}
+
+
+.tab {
+    width: 1200px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+
+.tab-button-item {
+    width: 600px;
+    height: 60px;
+}
+
+
+
+.tab-button-item-link {
+    color: white;
+    background-color: #356211;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    width: 1200px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+   
+}
+
+
+.tab-content {
+    display: none;
+    background-color: #356211;
+
+}
+
+
+.tab-content-current {
+    display: inherit;
+}
+
+

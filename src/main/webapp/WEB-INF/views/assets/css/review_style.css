@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+}
+
+ul {
+    list-style: none;
+}
+
+
+.mytool {
+    width: 1200px;
+    margin: auto;
+
+}
+
+
+    .title {
+        width: 300px;
+        height: 50px;
+        font-size: 30px;
+        padding-top: 80px;
+        padding-bottom: 30px;
+        text-align: center;
+        margin: auto;
+    }
+
+
+    .review-write {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+    
+        
+    .pull-left {
+        float: left;
+        display: inline-block;
+        cursor: pointer;
+    }
+    
+    .clearfix:after {
+        content: '';
+        display: block;
+        float: none;
+        clear: both;
+    }
+    
+    .hide {
+        display: none;
+    }
+    
+    
+    .tab {
+    width: 1200px;
+    margin: auto;
+    }
+    
+
+    .tab-button-item {
+        width: 600px;
+        display: block;
+        float: left;
+        margin-top: 50px;
+        padding-bottom: 100px;
+    }
+
+
+    
+    .tab-button-item-link{
+        width: 600px;
+        text-align: center;
+        font-size: 250px;
+        float: left;
+        color: #b5b5b5;
+
+    }
+    
+    
+    .tab-button-item-link.selected {
+    color: black;
+    }
+    

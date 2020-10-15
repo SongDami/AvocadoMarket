@@ -1,0 +1,231 @@
+@charset "UTF-8";
+
+* {
+	font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+	color: #222;
+}
+
+a {
+	color: #222;
+	text-decoration: none;
+}
+
+/* 창 줄어드는 최소 사이즈 지정 */
+body {
+	min-width: 1200px;
+}
+
+hr {
+	display: none;
+}
+
+.FAQ-tbody {
+	width: 1200px;
+	margin: auto;
+}
+
+/*자주 묻는 질문 타이틀
+.FAQ-title {
+	display: inline-block;
+	font-size: 28px;
+	color: #222;
+	font-weight: bold;
+	padding-top: 80px;
+	padding-bottom: 60px;
+} */
+
+.number-title {
+	float : left;
+	padding-left : 10px; 
+}
+
+/* float clear */
+.number-title div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+
+/* 질문 테이블 전체 아래로 */
+.faq-contents {
+	padding-top: 150px;
+}
+/* FAQ 아코디언 */
+.table-title {
+	background-color: #2222;
+	color: #222;
+	padding: 15px 0px;
+	width: 1199px;
+	text-align: center;
+	outline: none;
+	font-size: 15px;
+	font-weight: bold;
+	border: 1px solid #c9c9c9;
+}
+/* 컨텐츠 숫자 */
+.accordion .num-contents {
+	float: left;
+	padding-left: 10px;
+}
+/* float clear */
+.num-contents div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+.accordion {
+	background-color: white;
+	color: #222;
+	cursor: pointer;
+	padding: 12px;
+	width: 1200px;
+	text-align: center;
+	outline: none;
+	font-size: 15px;
+	transition: 0.4s;
+	border: 1px solid #c9c9c9;
+}
+
+.active, .accordion:hover {
+	background-color: #c9c9c9;
+}
+
+.accordion:after {
+	content: '\02C5';
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+/* float clear */
+.accordion div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+
+
+.active:after {
+	content: "\02C4";
+}
+
+.panel {
+	padding: 0 18px;
+	background-color: white;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+	border: 1px solid #f2f2f2;
+	text-align : center;
+}
+
+.panel p {
+	padding: 15px;
+}
+
+/*페이징*/
+.FAQ-footer {
+	padding-top: 25px;
+	height: 40px;
+	/* border-top: 1px solid #ddd; */
+	margin-top: 50px;
+}
+
+.FAQ-index {
+	width: 420px;
+	height: 32px;
+	margin: auto;
+}
+
+.FAQ-index button {
+	float: left;
+	width: 32px;
+	height: 32px;
+	background-color: rgb(255, 255, 255);
+	position: relative;
+	margin: 0px 18px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(170, 170, 170);
+	border-image: initial;
+	border-radius: 50%;
+}
+
+/* float clear */
+.FAQ-index div:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+
+.FAQ-index button span {
+	display: block;
+	text-align: center;
+	color: rgb(170, 170, 170);
+	font-weight: bold;
+}
+
+/* 화살표 위치 조정 */
+.FAQ-index .prev-btn span {
+	margin-right: 2px;
+}
+
+.FAQ-index .next-btn span {
+	margin-left: 2px;
+}
+
+.FAQ-index .index-list {
+	float: left;
+}
+
+/* float clear */
+.FAQ-index div:after, .index-listdiv:after {
+	clear: both;
+	float: none;
+	display: block;
+	content: '';
+}
+
+/* 인덱스 각 버튼 정렬 */
+.FAQ-index .index-list li {
+	display: inline-table;
+	width: 32px;
+	height: 32px;
+}
+
+/* 인덱스 각 버튼 스타일*/
+.FAQ-index .index-list li a {
+	display: table-cell;
+	width: 100%;
+	height: 100%;
+	font-size: 15px;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	border-color: transparent;
+	border-image: initial;
+	border-radius: 50%;
+}
+
+.FAQ-index .index-list li .index-indiv {
+	color: #356211;
+}
+
+/* 인덱스 버튼 마우스 오버 */
+.FAQ-index .index-list li .index-indiv:hover {
+	border-color: #356211;
+	text-decoration: none;
+}
+
+/* 인덱스 버튼 - 현재 페이지 */
+.FAQ-index .index-list li .index-active {
+	color: rgb(255, 255, 255);
+	background-color: #356211;
+	border-color: #356211;
+	cursor: default;
+}

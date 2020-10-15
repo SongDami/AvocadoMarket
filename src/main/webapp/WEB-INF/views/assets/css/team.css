@@ -1,0 +1,88 @@
+@charset "UTF-8";
+ * {
+        font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+        color: #222;
+    }
+
+    a {
+        color: #222;
+        text-decoration: none;
+    }
+
+    /* 창 줄어드는 최소 사이즈 지정 */
+    body {
+        min-width: 1200px;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .team-tbody {
+        width: 1200px;
+        margin:auto;
+    }
+
+    /*팀소개 타이틀*/
+    .team-title {
+        display: inline-block;
+        font-size: 40px;
+        color: #222;
+        font-weight: bold;
+        padding-top: 80px;
+        padding-bottom: 30px;
+        margin-left:200px;
+        
+    }
+
+    /*4조*/
+    .title-notice {
+        font-size: 30px;
+        font-weight: bold;
+        color: #356211;
+        text-align: center;
+        padding-top:20px;
+		margin-bottom:30px;
+
+    }
+
+    /*내용박스*/
+    .team-contents {
+        width: 1000px;
+        height: 500px;
+        margin: 50px auto;
+     	
+    }
+    
+    /*사진 크기  */
+   
+   /* 사진 수평 정렬 */
+   .teaml{
+   	float:left;
+   }
+   .team2{
+   float:left;
+   padding-left:40px;
+   }
+   .team3 {
+   	float:left;
+   	padding-left:50px;
+   }
+   
+   
+    /* 이름 */
+    .team1-name,
+    .team2-name,
+    .team3-name {
+    	   		font-size: 25px;
+        font-weight: bold;
+        color: #356211;
+        text-align: center;
+       
+     }
+    .team3-name {
+    	margin-right:30px;
+    }
+    
+   
+   

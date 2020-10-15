@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LikeMapper">
+
+    <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+    <resultMap id="LikeMapper"
+        type="study.spring.springhelper.model.Like">
+        <result property="like_id"   column="like_id" />
+        <result property="created_at"     column="created_at" />
+        <result property="updated_at"   column="updated_at" />
+        <result property="deleted_at" column="deleted_at" />
+        <result property="member_id"      column="member_id" />
+        <result property="goods_id" column="goods_id" />
+        <result property="goods_name" column="goods_name" />
+        <result property="price" column="price" />
+        <result property="thumbnailPath" column="thumbnailPath" />
+    </resultMap>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList"
+        parameterType="study.spring.springhelper.model.Like"
+        resultMap="LikeMapper">
+        SELECT  a.like_id,
+				a.created_at,
+				a.updated_at,
+				a.deleted_at,
+				a.member_id,  
+				a.goods_id,
+				b.goods_name,
+				FORMAT(b.price,0) as priceNum,
+				c.thumbnailPath
+          FROM  `like` a
+        		join goods b on b.goods_id = a.goods_id
+        		left outer join file c on c.upload_type = 'goods' and c.upload_id = a.goods_id and c.file_seq = 1
+         WHERE  a.member_id = #{member_id}
+         ORDER  BY a.updated_at DESC
+		 LIMIT #{startRow}, #{perPgLine}
+    </select>
+    
+    <!-- 데이터 수 조회를 위한 기능 정의 -->
+    <select id="selectCountAll"
+        parameterType="study.spring.springhelper.model.Like" resultType="int">
+        SELECT COUNT(*)
+        FROM `like`
+        WHERE member_id=#{member_id}
+    </select>
+
+    <!-- 이미 좋아효 했는지 확인 -->
+    <select id="chkListCnt"
+        parameterType="study.spring.springhelper.model.Like" resultType="int">
+        SELECT  count(like_id)
+          FROM  `like` 
+         WHERE  goods_id = #{goods_id}
+           AND  member_id = #{member_id}
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem"
+        parameterType="study.spring.springhelper.model.Like"
+        useGeneratedKeys="true" keyProperty="like_id">
+        INSERT INTO `like` (
+			created_at,
+			updated_at,
+			deleted_at,
+			member_id,  
+			goods_id
+        ) VALUES (
+            now(), 
+            now(), 
+            "99991231", 
+            #{member_id}, 
+            #{goods_id}
+        )
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem"
+        parameterType="study.spring.springhelper.model.Like">
+        DELETE FROM `like` 
+        WHERE goods_id=#{goods_id}
+        and member_id=#{member_id}
+    </delete>
+
+</mapper>

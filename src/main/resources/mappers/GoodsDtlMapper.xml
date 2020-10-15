@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsDtlMapper">
+
+	<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="GoodsDtl"
+		type="study.spring.springhelper.model.GoodsDtl">
+		<result property="goods_id" column="goods_id" />
+		<result property="goods_name" column="goods_name" />
+		<result property="price" column="price" />
+		<result property="priceNum" column="priceNum" />
+		<result property="goods_content" column="goods_content" />
+		<result property="like_cnt" column="like_cnt" />
+		<result property="nick" column="nick" />
+		<result property="hit" column="hit" />
+		<result property="member_id" column="member_id" />
+		<result property="updated_at" column="updated_at" />
+		<result property="dong_name" column="dong_name" />
+		<result property="like_yn" column="like_yn" />
+	</resultMap>
+	
+	<!-- 단일행 조회를 위한 기능 정의 -->
+	<select id="getGoodsDtl"
+		parameterType="study.spring.springhelper.model.GoodsDtl"
+		resultMap="GoodsDtl">
+		SELECT  a.goods_id
+			   ,a.goods_name
+			   ,(select count(1) from `like` where goods_id = a.goods_id) as like_num
+			   ,IFNULL((select  case when count(1) > 0 then 'Y' else 'N' end 
+						  from  `like`
+						 where  goods_id = a.goods_id
+						   and  member_id = #{member_id}), 'N') as like_yn
+			   ,a.price
+			   ,(select nick from  member where  member_id = a.member_id) as nick
+			   ,FORMAT(a.price,0) as priceNum
+			   ,replace(a.goods_content, '\n', CHR(10)) as goods_content
+			   ,a.hit
+			   ,a.member_id
+			   ,DATE_FORMAT(a.updated_at, '%Y-%m-%d') AS updated_at
+			   ,b.dong_name
+<!--         	   ,c.gu_name -->
+<!--         	   ,d.si_name -->
+		  FROM  goods a
+				left outer join dong b on b.dong_id = a.dong_dong_id
+<!--           		left outer join gu c on c.gu_id = b.gu_gu_id -->
+<!--           		left outer join si d on d.si_id = c.si_si_id -->
+		 WHERE  a.goods_id = #{goods_id}
+	</select>
+
+	<!--조회수 증가를 위한 hit 기능정의 -->
+	<update id="updatehit"
+		parameterType="study.spring.springhelper.model.GoodsUp">
+		UPDATE  goods
+		   SET  hit = hit+1
+		 WHERE  goods_id = #{goods_id}
+	</update>
+
+
+	
+</mapper>

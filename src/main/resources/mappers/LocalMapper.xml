@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LocalMapper">
+
+    <!-- Beans 클래스의 객체이름(id)과 클래스이름(type)을 명시한다. -->
+    <resultMap id="localMap"
+        type="study.spring.springhelper.model.Local">
+        <!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+        <result property="si_id" column="si_id" />
+        <result property="si_name" column="si_name" />
+        <result property="created_at" column="created_at" />
+    </resultMap>
+
+    <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem"
+        parameterType="study.spring.springhelper.model.Local"
+        resultMap="localMap">
+        SELECT si_id, si_name FROM local WHERE si_id=#{si_id};
+    </select>
+
+    <!-- 다중행 조회를 위한 기능 정의 -->
+    <select id="selectList"
+        parameterType="study.spring.springhelper.model.Local"
+        resultMap="localMap">
+        SELECT si_id, si_name FROM local
+        
+        <where>
+            <if test="si_name != null and si_name != ''">
+                si_name LIKE concat('%', #{si_name}, '%')
+            </if>
+
+        </where>
+        
+        ORDER BY si_id DESC
+        
+        <if test="listCount > 0">
+            LIMIT #{offset}, #{listCount}
+        </if>
+    </select>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem"
+        parameterType="study.spring.springhelper.model.Local"
+        useGeneratedKeys="true"
+        keyProperty="si_id">
+        INSERT INTO local (si_name, created_at) VALUES (#{si_name}, #{loc}, #{created_at});
+    </insert>
+
+    <!-- 데이터 삭제를 위한 기능 정의 -->
+    <delete id="deleteItem"
+        parameterType="study.spring.springhelper.model.Local">
+        DELETE FROM local WHERE si_id=#{si_id};
+    </delete>
+
+    <!-- 데이터 갱신을 위한 기능 정의 -->
+    <update id="updateItem"
+        parameterType="study.spring.springhelper.model.Local">
+        UPDATE local SET si_name=#{si_name}, loc=#{loc}
+        WHERE si_id=#{si_id};
+    </update>
+    
+    <!--
+        조건에 맞는 데이터 수를 집계하여 int 타입으로 반환한다.
+        count, max, min, sum, avg 함수를 사용한 경우 Mapper에서는
+        resultMap이 아닌 resultType으로 반환한다.
+    -->
+    <select id="selectCountAll" 
+            parameterType="study.spring.springhelper.model.Local"
+            resultType="int">
+        SELECT COUNT(*) FROM local
+        
+        <where>
+            <if test="si_name != null and si_name != ''">
+                si_name LIKE concat('%', #{si_name}, '%')
+            </if>
+            
+            <if test="loc != null and loc != ''">
+                OR loc LIKE concat('%', #{loc}, '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

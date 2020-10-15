@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+
+
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+
+.mytool {
+    width: 1200px;
+    margin: auto;
+
+}
+
+
+.pull-left {
+    float: left;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    float: none;
+    clear: both;
+}
+
+.hide {
+    display: none;
+}
+
+
+.tab {
+    width: 1200px;
+    margin: auto;
+}
+
+
+.tab-button-item {
+    width: 600px;
+    height: 60px;
+}
+
+
+.tab-button-item-link.selected {
+    background-color: #1c3609;
+    color: white;
+}
+
+
+.tab-button-item-link {
+    color: white;
+    background-color: #356211;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    width: 600px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    float: left;
+}
+
+
+.tab-content {
+    display: none;
+    background-color: #356211;
+    
+}
+
+
+.tab-content-current {
+    display: inherit;
+}
+

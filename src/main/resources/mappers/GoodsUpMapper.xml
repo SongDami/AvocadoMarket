@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsUpMapper">
+
+	<!-- Beans의 멤버변수(property)이름과 대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="goodsUpMap" type="study.spring.springhelper.model.GoodsUp">
+		<result property="goods_name" column="goods_name" />
+		<result property="goods_content" column="goods_content" />
+		<result property="price" column="price" />
+		<result property="priceNum" column="priceNum" />
+		<result property="state" column="state" />
+		<result property="hit" column="hit" />
+		<result property="created_at" column="created_at" />
+		<result property="updated_at" column="updated_at" />
+		<result property="deleted_at" column="deleted_at" />
+		<result property="member_id" column="member_id" />
+		<result property="dong_dong_id" column="dong_dong_id" />
+		<result property="buyer_member_id" column="buyer_member_id" />
+		<result property="category_category_id" column="category_category_id" />
+		<result property="thumbnailPath" column="thumbnailPath" />
+		<result property="like_yn" column="like_yn" />
+	</resultMap>
+	
+	<!-- 상품삭제를 위한 신고 카운트 -->
+	<select id="getreportCnt"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultType="int">
+		select  count(*)
+		  from  black
+		 where goods_id = #{goods_id}
+		 and black_type = '신고'
+	</select>
+	
+	<!-- 상품삭제를 위한 댓글 카운트  -->
+	<select id="getcommentCnt"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultType="int">
+		select  count(*)
+		  from  goods_comment 
+		 where goods_id = #{goods_id}
+	</select>
+	
+	<!-- 상품삭제를 위한 찜하기 카운트  -->
+	<select id="getlikeCnt"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultType="int">
+		select  count(*)
+		  from  `like`
+		 where goods_id = #{goods_id}
+	</select>
+	
+	<!-- 상품삭제를 위한 차단 카운트  -->
+	<select id="getblackCnt"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultType="int">
+		select  count(*)
+		  from  black 
+		 where goods_id = #{goods_id}
+		 and black_type = '차단'
+	</select>
+	
+	<!-- 상품 상태 변경을 위한 기능 정의 -->
+	 <update id="updatedropbox"
+     parameterType="study.spring.springhelper.model.GoodsUp">
+     UPDATE  goods 
+        SET  state=#{state}
+      where goods_id = #{goods_id}
+    </update>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem" parameterType="study.spring.springhelper.model.GoodsUp" useGeneratedKeys="true" keyProperty="goods_id">
+        INSERT INTO goods(
+             goods_name
+            ,goods_content
+            ,price
+            ,state
+            ,hit
+            ,created_at
+            ,updated_at
+            ,deleted_at
+            ,member_id
+            ,dong_dong_id
+			,buyer_member_id
+			,category_category_id
+        ) VALUES (
+             #{goods_name}
+            ,#{goods_content}
+            ,#{price}
+            ,"판매중"
+            ,'0'
+            ,now()
+            ,now()
+            ,'99991231'
+			,#{member_id}
+			,(select dong_dong_id from member where member_id = #{member_id})
+            ,#{buyer_member_id}
+            ,#{category_category_id}
+        )
+    </insert>
+   <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem"
+        parameterType="study.spring.springhelper.model.GoodsUp"
+        resultMap="goodsUpMap">
+        SELECT
+             goods_name
+            ,goods_content
+            ,FORMAT(price,0) as priceNum
+            ,state
+            ,hit
+            ,created_at
+            ,updated_at
+            ,deleted_at
+            ,member_id
+            ,dong_dong_id
+			,buyer_member_id
+			,category_category_id
+        FROM goods p
+        INNER JOIN member d ON p.member_id=d.member_id
+        WHERE goods_id=#{goods_id}
+    </select>
+
+	<!-- 내가 등록한, 상태가 판매완료가 아닌 굿즈 판매목록 카운트  -->
+	<select id="getSaleListCnt"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultType="int">
+		select  count(*)
+		  from  goods
+		 where  member_id = #{member_id}
+		   and  state != '판매완료'
+	</select>
+
+    <!-- mypage_sale_list.jsp 판매목록 조회 -->
+    <select id="selectListSale"
+		parameterType="study.spring.springhelper.model.GoodsUp"
+		resultMap="goodsUpMap">
+		SELECT  p.goods_id
+			   ,p.goods_name
+			   ,p.goods_content
+			   ,FORMAT(p.price,0) as priceNum
+			   ,p.state
+			   ,p.hit
+			   ,p.created_at
+			   ,p.updated_at
+			   ,p.deleted_at
+			   ,p.member_id
+			   ,p.dong_dong_id
+			   ,p.buyer_member_id
+			   ,p.category_category_id
+			   ,f.thumbnailPath
+        	   ,IFNULL((select  case when count(1) > 0 then 'Y' else 'N' end 
+        				  from  `like`
+        				 where  goods_id = p.goods_id
+        				   and  member_id = #{login_id}), 'N') as like_yn
+		  FROM  goods p
+				left outer join file f on f.upload_type = 'goods' and f.upload_id = p.goods_id and f.file_seq = 1
+		 WHERE  member_id = #{member_id}
+		   AND  p.state != '판매완료'
+		 LIMIT #{startRow}, #{perPgLine}
+	</select>
+	
+	<!-- 상품 삭제시 신고내역 삭제 -->
+	<delete id="delReport" parameterType="study.spring.springhelper.model.GoodsUp">
+		DELETE  FROM black
+		 where  goods_id = #{goods_id}
+		   and  black_type = '신고'
+	</delete>
+	
+	<!-- 상품 삭제시 댓글 삭제 -->
+	<delete id="delComment" parameterType="study.spring.springhelper.model.GoodsUp">
+		DELETE  FROM goods_comment 
+		 where  goods_id = #{goods_id}
+	</delete>
+	
+	<!-- 상품 삭제시 좋아요 삭제 -->
+	<delete id="delLike" parameterType="study.spring.springhelper.model.GoodsUp">
+		DELETE  FROM `like`
+		 where  goods_id = #{goods_id}
+	</delete>
+	
+	<!-- 상품 삭제시 좋아요 삭제 -->
+	<delete id="delFile" parameterType="study.spring.springhelper.model.GoodsUp">
+		DELETE  FROM file
+		 where  upload_type = 'goods'
+		   and  upload_id = #{goods_id}
+	</delete>
+	
+	<!-- 데이터 삭제를 위한 기능 정의 -->
+	<delete id="deleteItem"
+		parameterType="study.spring.springhelper.model.GoodsUp">
+		DELETE FROM goods WHERE goods_id=#{goods_id} and member_id=#{member_id}
+	</delete>
+
+	<!-- 데이터 갱신을 위한 기능 정의 -->
+	<update id="updateItem"
+		parameterType="study.spring.springhelper.model.GoodsUp">
+		UPDATE goods SET
+			goods_name=#{goods_name},
+			goods_content=#{goods_content},
+			price=#{price},
+			state="판매중",
+			updated_at=now(),
+			member_id=#{member_id},
+			dong_dong_id=(select dong_dong_id from member where member_id = #{member_id}),
+			category_category_id=#{category_category_id}
+		WHERE goods_id=#{goods_id}
+		AND member_id=#{member_id}
+	</update>
+</mapper>

@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+
+/* 기본 설정 */
+
+* {
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+    color: #222;
+}
+
+/* 링크 밑줄 제거, 색상 설정 */
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* 조원 모두 통일하기(줄어드는 최소 사이즈 지정) */
+body {
+    min-width: 1200px;
+}
+
+
+hr {
+    display: none;
+}
+
+.container{
+    margin:auto;
+}
+
+
+
+
+/* 회원가입 */
+.title_name {
+    display: inline-block;
+    font-size: 28px;
+    color: #222;
+    font-weight: bold;
+    padding-top: 80px;
+    padding-bottom: 50px;
+
+}
+
+/* 필수 입력 항목(*) */
+.title_ect {
+    font-size: 12px;
+    color: #b0b0b0
+}
+
+/* 왼쪽 타이틀 */
+.join_body>form>div>p {
+    display: block;
+    font-size: 15px;
+    width: 120px;
+    float: left;
+    line-height: 34px;
+}
+
+/* float clear */
+.join_body div:after {
+    clear: both;
+    float: none;
+    display: block;
+    content: '';
+}
+
+/* 회원가입 body 크기, 위치 */
+.join_body {
+    width: 600px;
+    margin: auto;
+}
+
+/* 전체 버튼 색, 둥글게 */
+.container button {
+    background-color: #356211;
+    color: white;
+    border: 1px solid #356211;
+    border-radius: 5px;
+}
+
+/* 버튼 설정 */
+.join_body button {
+    height: 32px;
+    line-height: 28px;
+    margin-right: 20px;
+}
+
+/* input box 크기, 위치 설정 */
+input {
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+    width: 280px;
+    height: 32px;
+    padding-right: 100px;
+}
+
+/* 비밀번호, 이메일 확인 padding */
+.pd {
+    margin-top: 5px;
+}
+
+/* 지역선택 select 크기 */
+select {
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid #c9c9c9;
+    color: #828282
+}
+
+/* 키워드 알림 설명글 */
+.keywordex>p {
+    padding-top: 3px;
+    padding-left: 120px;
+    font-size: 14px;
+    color: #9c9c9c;
+    margin: auto;
+
+}
+
+/* 회원정보 수정 버튼 */
+.join_button {
+    font-size: 25px;
+    text-align: center;
+    margin:0 auto;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.join_button button {
+    width: 150px;
+    height: 30px;
+}
+
+.readonly {
+    border: none;
+}
+
+/* 에러 메시지에 대한 글자 색상 */
+    .error {
+        color: red;
+    }
+
+
+/* 에러가 발생한 <input> 태그 */
+    input.error {
+        background-color: #eee;
+    }
+
+    /* 에러메시지가 표시중인 <label> 태그 */
+    label.error {
+        font-size: 10px;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0;
+    }

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UploadImageMapper">
+
+	<!-- Beans의 멤버변수(property)이름과  대상 테이블의 컬럼(column)을 연결한다. -->
+	<resultMap id="uploadImageMap"
+		type="study.spring.springhelper.model.UploadImage">
+		<result property="fieldName" column="fieldName" />
+		<result property="orginName" column="orginName" />
+		<result property="contentType" column="contentType" />
+		<result property="fileSize" column="fileSize" />
+		<result property="filePath" column="filePath" />
+		<result property="thumbnailPath" column="thumbnailPath" />
+		<result property="fileUrl" column="fileUrl" />
+		<result property="thumbnailUrl" column="thumbnailUrl" />
+		<result property="upload_type" column="upload_type" />
+		<result property="upload_id" column="upload_id" />
+		<result property="file_seq" column="file_seq" />
+	</resultMap>
+
+    <!-- 데이터 저장을 위한 기능 정의 -->
+    <insert id="insertItem"
+        parameterType="study.spring.springhelper.model.UploadImage"
+        useGeneratedKeys="true" keyProperty="file_id">
+        insert into file (
+             fieldName, orginName, contentType, fileSize, filePath, thumbnailPath
+			,fileUrl, thumbnailUrl
+			,upload_type, upload_id, file_seq
+        ) values (
+             #{fieldName}, #{orginName}, #{contentType}, #{fileSize}, #{filePath}, #{thumbnailPath}
+			,#{fileUrl}, #{thumbnailUrl}
+			,#{upload_type}, #{upload_id}, #{file_seq}
+        )
+    </insert>
+    
+     <!-- 단일행 조회를 위한 기능 정의 -->
+    <select id="selectItem"
+        parameterType="study.spring.springhelper.model.UploadImage"
+        resultMap="uploadImageMap">
+        SELECT  file_id,
+        		file_seq,
+        		fieldName,
+        		orginName,
+        		contentType,
+        		fileSize,
+        		filePath,
+        		thumbnailPath,
+        		fileUrl,
+        		thumbnailUrl
+          FROM  file p
+         WHERE  p.upload_type = #{upload_type}
+           and  p.upload_id = #{upload_id}
+         limit  1
+    </select>
+
+    <!-- goods_detail.jsp 에서 등록된 이미지 목록을 조회 -->
+	<!-- 항상 5개의 첨부파일 행이 리턴되는 쿼리 -->
+    <select id="selectList"
+        parameterType="study.spring.springhelper.model.UploadImage"
+        resultMap="uploadImageMap">
+	        select  file_id,
+	        		file_seq,
+	        		fieldName,
+	        		orginName,
+	        		contentType,
+	        		fileSize,
+	        		filePath,
+	        		thumbnailPath,
+	        		fileUrl,
+	        		thumbnailUrl
+	          from  file p
+	         where  p.upload_type = #{upload_type}
+	           and  p.upload_id = #{upload_id}
+	         order  by p.file_seq
+    </select>
+    
+    <!-- goods_edit.jsp 에서는 고정 5행 이미지를 불러와야함 -->
+	<!-- 항상 5개의 첨부파일 행이 리턴되는 쿼리 -->
+    <select id="selectList5"
+        parameterType="study.spring.springhelper.model.UploadImage"
+        resultMap="uploadImageMap">
+	        select  b.file_id,
+	        		t.file_seq,
+	        		b.fieldName,
+	        		b.orginName,
+	        		b.contentType,
+	        		b.fileSize,
+	        		b.filePath,
+	        		b.thumbnailPath,
+	        		b.fileUrl,
+	        		b.thumbnailUrl
+	          from (select 1 as file_seq from dual union all
+			        select 2 as file_seq from dual union all
+			        select 3 as file_seq from dual union all
+			        select 4 as file_seq from dual union all
+			        select 5 as file_seq from dual) t
+	        		left outer join
+	        	   (select  file_id,
+			        		file_seq,
+			        		fieldName,
+			        		orginName,
+			        		contentType,
+			        		fileSize,
+			        		filePath,
+			        		thumbnailPath,
+			        		fileUrl,
+			        		thumbnailUrl
+			          from  file p
+			         where  p.upload_type = #{upload_type}
+			           and  p.upload_id = #{upload_id}
+		            ) b on b.file_seq = t.file_seq
+	         order  by t.file_seq
+    </select>
+    
+	<!-- 첨부파일 내용 수정 -->
+    <update id="uptUploadItem"
+        parameterType="study.spring.springhelper.model.UploadImage">
+    	update  file
+    	   set  fieldName = #{fieldName}
+    		   ,orginName = #{orginName}
+    		   ,contentType = #{contentType}
+    		   ,fileSize = #{fileSize}
+    		   ,filePath = #{filePath}
+    		   ,thumbnailPath = #{thumbnailPath}
+    		   ,fileUrl = #{fileUrl}
+    		   ,thumbnailUrl = #{thumbnailUrl}
+    	 where  file_id = #{file_id}
+<!--     	   and  upload_type = #{upload_type} -->
+<!--     	   and  upload_id = #{upload_id} -->
+<!--     	   and  file_seq = #{file_seq} -->
+    </update>
+    
+	<!-- 첨부파일 내용 삭제 -->
+    <delete id="delUploadItem"
+        parameterType="study.spring.springhelper.model.UploadImage">
+    	delete  from file
+    	 where  upload_type = #{upload_type}
+    	   and  upload_id = #{upload_id}
+    </delete>
+    
+	<!-- 첨부파일 내용 삭제 -->
+    <delete id="delUploadItemSeq"
+        parameterType="study.spring.springhelper.model.UploadImage">
+    	delete  from file
+    	 where  upload_type = #{upload_type}
+    	   and  upload_id = #{upload_id}
+    	   and  file_seq = #{file_seq}
+    </delete>
+    
+</mapper>

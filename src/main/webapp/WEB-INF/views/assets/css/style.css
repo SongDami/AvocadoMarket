@@ -1,0 +1,152 @@
+
+/* 모든 페이지에 적용할 공통 CSS 파일
+ ------------------------------------------------ */
+
+
+* {
+    font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+
+}
+
+
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+header {
+    min-width: 1200px;
+}
+
+.header-container {
+    margin: auto;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+#top1 {
+    height: 28px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    border-bottom: #d4d4d4 1px solid;
+
+}
+
+#top1 .star {
+
+    float: left;
+    display:block;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 18px;
+    font-size: 14px;
+    color: #666;
+
+}
+
+#top1 .star i {
+    color: #f7ce16;
+    padding-right: 3px;
+
+}
+
+
+.clear:after {
+    clear: both;
+    float: none;
+    display: block;
+    content: '';
+}
+
+#top2 {
+    height: 150px;
+
+
+
+}
+
+.top-2 {
+        width: 1350px;
+    margin: auto;
+}
+
+.logo {
+    display: inline-block;
+    float: left;
+}
+
+
+/* 부모가 150, 자식이 40 빼서 나누기 2*/
+.search_bar {
+    float: left;
+    padding-left: 100px;
+    padding-right: 50px;
+    line-height: 150px;
+}
+
+.inbar > input {
+    border: #356211 3.5px solid;
+    width: 550px;
+    height: 40px;
+}
+
+.search{
+    background-color: white;
+    border: none;
+}
+
+
+.mymenu {
+    width: 340px;
+    margin: auto;
+    float: right;
+    line-height: 150px;
+    font-size: 20px;
+}
+
+.mymenu a {
+    color: #356211;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+
+.fright {
+    float: right;
+    display:none;
+}
+
+
+
+/* footer */
+
+
+.footer-container {
+
+    margin: auto;
+    border-top : #d4d4d4 1px solid;
+    padding-bottom: 50px;
+    background:#fff;
+
+}
+
+.footer-container a , .footer-container span, .footer-copy small {
+    color:#9c9c9c;
+}
+    .footer-group {
+        padding-top : 50px;
+        text-decoration: none;
+        color: #eee;
+        font: 14px "굴림";
+        text-align: center;
+
+}
+
+    .footer-copy{
+        text-decoration: none;
+        font: 14px "굴림";
+        text-align: center;
+}

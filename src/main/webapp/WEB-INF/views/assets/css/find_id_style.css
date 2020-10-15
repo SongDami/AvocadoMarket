@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+
+    /* 기본 설정 */
+    * {
+        font-family: "나눔고딕", "맑은고딕", "굴림", "Helvetica";
+        color: #222;
+    }
+
+    a {
+        color: #222;
+        text-decoration: none;
+    }
+
+    /* 조원 모두 통일하기(줄어드는 최소 사이즈 지정) */
+    body {
+        min-width: 1200px;
+
+
+    }
+
+    hr {
+        display: none;
+    }
+
+    input {
+        border-radius: 5px;
+        border: 1px solid #c9c9c9;
+        width: 300px;
+        height: 40px;
+        padding-right: 100px;
+        text-align: left;
+        margin-bottom: 20px;
+
+
+    }
+
+
+
+    h1 {
+        display: inline-block;
+        font-size: 30px;
+        color: #222;
+        font-weight: bold;
+        padding-top: 80px;
+        padding-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+
+    span {
+      margin-right: 10px;
+    }
+
+
+
+    .container {
+      text-align: center;
+      width: 1000px;
+      margin: auto;
+      height:620px;
+    }
+
+    .tab-group {
+      margin: auto;
+      width: 1200px;
+      background-color: pink;
+
+
+    }
+
+
+    .tab-group>div {
+      float: left;
+    }
+
+
+  /* float 마감 */
+    .clear {
+      float: none;
+      clear: both;
+    }
+
+
+    .find-id, .find-pw  {
+      background-color: #356211;
+        color: white;
+        border: 1px solid #356211;
+        border-radius: 5px;
+        width: 500px;
+        height: 50px;
+        margin-bottom: 5px;
+        font-size: 20px;
+        line-height: 50px;
+    }
+
+    .find-id a, .find-pw a {
+      color: white;
+      display: block;
+
+    }
+
+
+
+    .input-group {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    button {
+        background-color: #356211;
+        color: white;
+        border: 1px solid #356211;
+        border-radius: 5px;
+        width: 300px;
+        height: 40px;
+        margin-bottom: 5px;
+        margin-top: 20px;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    button:hover, .find-id:hover, .find-pw:hover {
+        background-color: #1c3609;
+    }
+
